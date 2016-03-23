@@ -1,0 +1,23 @@
+Scallop,23,Starter
+Oyster,24,Starter
+Rockpool,21.00,Starter
+Game Terrine,21.00,Starter
+Pig’s Head & Langoustine,22.00,Starter
+Veal,23.00,Starter
+Halibut,37.00,Main
+Sea Bass,37.00,Main
+Monkfish,36.00,Main
+Roe Deer,37.50,Main
+Lamb,36.50,Main
+Mallard,35.50,Main
+Pumpkin,13.00,Dessert
+Sea Buckthorn & Yoghurt,12.00,Dessert
+Chocolate & Orange,12.00,Dessert
+Pistachio,13.00,Dessert
+Caramel and Apple,12.50,Dessert
+Cheese,14.00,Dessert
+Chocolate,4.25,Drinks
+Wahaca Blanco,4.40,Drinks
+Pinot Grigio,13.25,Drinks
+Sauvignon Blanc,5.85,Drinks
+Tempranillo,18.85,Drinks
