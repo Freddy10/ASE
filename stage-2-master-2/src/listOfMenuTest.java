@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class MenuItemTest {
+public class listOfMenuTest {
 
 	@Test
 	public void testEqualsObject() {

@@ -6,7 +6,7 @@ import org.junit.Test;
 * This class consists of different JUnit cases to test several methods of Order class
 
 */
-public class OrderTest {
+public class listOfOrdersTest {
 
 	@Test
 	public void testOrder() throws InvalidPositiveInteger {

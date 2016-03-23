@@ -7,7 +7,7 @@ import org.junit.Test;
 * <h1>OrderTableTest</h1>
 * This class consists of different JUnit cases to test several methods of OrderTable class
 */
-public class OrderTableTest {
+public class tableOrdersTest {
 
 	@Test
 	public void testFindByID() throws InvalidPositiveInteger, NoMatchingOrderID {

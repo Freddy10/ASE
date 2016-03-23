@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-public class Log {
+public class LogFile {
 	
 	private static final Log instance = new Log();
 	private String logText;

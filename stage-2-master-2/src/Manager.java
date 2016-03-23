@@ -18,7 +18,7 @@ public class Manager {
 	 * In addition, creates the user interface
 	 */
 	public void run(){
-		OrderGenerator model = new OrderGenerator();
+		RestaurantModel model = new RestaurantModel();
 		MVCRestaurantView view = new MVCRestaurantView(model);
 		MVCRestaurantController controller = new MVCRestaurantController(model, view);   
 		view.setVisible(true);
