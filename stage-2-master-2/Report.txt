@@ -33,91 +33,40 @@ DRINKS
 
 TABLE SUMMARY
 ==============
-TABLE 1
-SALMON CAKES        4  *  4.00 =  16.00
-FRENCH FRIES        6  *  2.50 =  15.00
-JUICE               8  *  2.50 =  20.00
-                                 ======
-Total for this table :            51.00
-Discount :                        10.00
-Discounted total :                41.00
-
-TABLE 2
-LEMON SORBET        2  *  3.50 =   7.00
-                                 ======
-Total for this table :             7.00
-Discount :                         0.00
-Discounted total :                 7.00
-
-TABLE 3
-COFFEE              6  *  2.00 =  12.00
-                                 ======
-Total for this table :            12.00
-Discount :                         2.00
-Discounted total :                10.00
-
-TABLE 4
-GRILLED SEABASS     3  * 14.00 =  42.00
-TEA                 6  *  1.50 =   9.00
-MINESTRONE SOUP     8  *  3.50 =  28.00
-BAKED CHEESECAKE    5  *  4.00 =  20.00
-JUICE               7  *  2.50 =  17.50
-                                 ======
-Total for this table :           116.50
-Discount :                        22.00
-Discounted total :                94.50
-
-TABLE 5
-GRILLED SEABASS     1  * 14.00 =  14.00
-                                 ======
-Total for this table :            14.00
-Discount :                         2.00
-Discounted total :                12.00
-
-TABLE 6
-COFFEE              8  *  2.00 =  16.00
-FRENCH FRIES        2  *  2.50 =   5.00
-LASAGNE             7  * 15.00 = 105.00
-BAKED CHEESECAKE    9  *  4.00 =  36.00
-                                 ======
-Total for this table :           162.00
-Discount :                        32.00
-Discounted total :               130.00
-
 FREQUENCY REPORT
 ================
-Tea                   6
-Salmon cakes          4
-French fries          8
-Grilled seabass       4
-Minestrone soup       8
-Lemon sorbet          2
-Juice                 15
-Lasagne               7
-Coffee                14
-Baked cheesecake      14
-
+There is no items ordered yet
 DISHES NOT ORDERED
 ==================
+Baked cheesecake
 Cajun fries
+Coffee
 Custard tart
+French fries
 Garlic bread
+Grilled seabass
+Juice
+Lasagne
+Lemon sorbet
+Minestrone soup
 Mixed olives
 Mushroom risotto
 Rhubarb crumble
 Roast chicken
 Roasted vegetables
 Salad
+Salmon cakes
 Sparkling water
 Steak
+Tea
 
 BILLS PRICE STATISTICS (without discounts)
 ==========================================
-Most expensive table: Table 6, whose bill is £162.00
-Cheapest table: Table 2, whose bill is £7.00
-The average bill paid is: £60.42
+Most expensive table: Table 0, whose bill is £0.00
+Cheapest table: Table 0, whose bill is £0.00
+The average bill paid is: £0.00
 
 VEGETARIAN DISHES STATISTICS
 ============================
 Menu contains 14 veggie dishes out of 21
-71.0% of orders are vegetarian dishes
+0.0% of orders are vegetarian dishes

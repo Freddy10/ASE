@@ -6,13 +6,13 @@ import org.junit.Test;
 * This class consists of different JUnit cases to test several methods of Aggregator class
 *
 */
-public class OrderGeneratorTest {
+public class RestaurantModelTest {
 
 	private static final double DELTA = 1e-15;
 	
 	@Test
 	public void testGetTableTotal() {
-		OrderGenerator collections = new OrderGenerator();
+		RestaurantModel collections = new RestaurantModel();
 		//collections.populate();
 		assertEquals(0,collections.getTableTotal(-1),DELTA);
 		double total1 = collections.getTableTotal(1);
@@ -25,7 +25,7 @@ public class OrderGeneratorTest {
 
 	@Test
 	public void testGetTableDiscountedTotal() {
-		OrderGenerator collections = new OrderGenerator();
+		RestaurantModel collections = new RestaurantModel();
 		//collections.populate();
 		assertEquals(0,collections.getTableDiscountedTotal(-1),DELTA);
 		double total1 = collections.getTableDiscountedTotal(1);

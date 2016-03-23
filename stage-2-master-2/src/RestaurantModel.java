@@ -16,25 +16,25 @@ import java.util.stream.Collectors;
 import java.util.Map.Entry;
 import java.util.ArrayList;
 
-public class OrderGenerator extends Observable{
+public class RestaurantModel extends Observable{
 
-	//OrderTable variable containing information of all the orders
-	private OrderTable orderTable;
+	//TableOrders variable containing information of all the orders
+	private TableOrders tableOrders;
 	//Instance variable which stores all the items in the menu
-	private MenuItemMap menuItemMap;
+	private MenuHashMap menuHashMap;
 	//LinkedList containing all the orders...
 	//...in the kitchen,...
-	private LinkedList<Order> ordersInKitchen;
+	private LinkedList<ListOfOrders> kitchenOrders;
 	//...in the hatch and...
-	private LinkedList<Order> hatch;
+	private LinkedList<ListOfOrders> hatch;
 	//...at each table
-	private ArrayList<LinkedList<Order>> tables;
+	private ArrayList<LinkedList<ListOfOrders>> tables;
 	//Log instance using Singleton pattern
-	Log log;
-	//Order collection population method
+	LogFile log;
+	//ListOfOrders collection population method
 	private String populateMethod;
 	//Set to true when the kitchen closes, i.e. no more orders accepted
-	private boolean finished;
+	private boolean finishedRun;
 	//Set to true when the hatch doesn't contain orders
 	private boolean hatchFinished;
 	//Number of tables in the restaurant
@@ -43,35 +43,35 @@ public class OrderGenerator extends Observable{
 	// and discounts provided by the waiter as values
 	private HashMap<Integer,Integer> discounts;
 	//Set to true when the kitchen opens and orders start to be made
-	private boolean startSimulation;
+	private boolean startThread;
 	//The duration of the simulation in seconds
 	private int kitchOpenTime;
 	//Shows, if the simulation is active, i.e. it becomes true when the last order reaches its table
-	private boolean simulationFinished;
+	private boolean threadFinished;
 
 	//Kitchen and hatch panel headers in the GUI
 	private static final String orderTitles = String.format("%-9s", "ID")+
 			String.format("%-7s", "TABLE")+ String.format("%-22s", "ITEM NAME") + 
 			String.format("%-5s", "QUANT") +"\r\n";
 
-	public OrderGenerator() {
-		orderTable = new OrderTable();
-		menuItemMap = new MenuItemMap();
-		MenuScanner s = new MenuScanner();
-		menuItemMap = s.getMenuEntries();
+	public RestaurantModel() {
+		tableOrders = new TableOrders();
+		menuHashMap = new MenuHashMap();
+		CheckMenu s = new CheckMenu();
+		menuHashMap = s.getMenuEntries();
 		discounts = new HashMap<Integer,Integer>();
-		ordersInKitchen = new LinkedList<Order>();
+		kitchenOrders = new LinkedList<ListOfOrders>();
 		populateMethod = "";
-		log = Log.getInstance();
+		log = LogFile.getInstance();
 		numberOfTables = 6;
-		finished = false;
+		finishedRun = false;
 		hatchFinished = false;
-		startSimulation = false;
-		hatch = new LinkedList <Order>();
-		simulationFinished = false;
-		tables = new ArrayList<LinkedList<Order>>();
+		startThread = false;
+		hatch = new LinkedList <ListOfOrders>();
+		threadFinished = false;
+		tables = new ArrayList<LinkedList<ListOfOrders>>();
 		for (int i = 1; i <=6; i++) {
-			tables.add(new LinkedList<Order>());
+			tables.add(new LinkedList<ListOfOrders>());
 		}
 	}
 
@@ -79,24 +79,24 @@ public class OrderGenerator extends Observable{
 	 * Returns, if the kitchen is still open, i.e. still taking new orders.
 	 * @return true, if the closed, and false, if the kitchen is still open.
 	 */
-	public boolean isFinished() {
-		return finished;
+	public boolean isFinishedRun() {
+		return finishedRun;
 	}
 
 	public boolean hatchIsFinished() {
 		return hatchFinished;
 	}
 
-	public boolean isSimulationActive() {
-		return startSimulation;
+	public boolean isThreadActive() {
+		return startThread;
 	}
 
 	/**
 	 * Sets the simulation as finished; becomes true when last order reaches its table.
 	 * Notifies the observers that the simulation has ended.
 	 */
-	public void setSimFinished(){
-		simulationFinished = true;
+	public void setThreadFinished(){
+		threadFinished = true;
 
 		//Notifies observers.
 		setChanged();
@@ -109,27 +109,27 @@ public class OrderGenerator extends Observable{
 	 * pressed and the simulation is running. It becomes true when the last order reaches its table.
 	 * @return boolean with simulation status, false, if running, true, if finished.
 	 */
-	public boolean getSimFinished(){
-		return simulationFinished;
+	public boolean getThreadFinished(){
+		return threadFinished;
 	}
 
-	public void setStartSimulation() {
-		this.startSimulation = true;
+	public void setStartThread() {
+		this.startThread = true;
 	}
 
 	/**
 	 * Indicates the end of the working hours of the kitchen, i.e. no more orders accepted.	
 	 */
-	public void setFinished() {
-		finished = true;
+	public void setFinishedRun() {
+		finishedRun = true;
 	}
 
 	/**
 	 * Returns all the orders in the kitchen in the order they arrived to the kitchen.
 	 * @return a LinkedList of all the orders in the kitchen.
 	 */
-	public LinkedList <Order> getOrdersInKitchen(){
-		return ordersInKitchen;
+	public LinkedList <ListOfOrders> getOrdersInKitchen(){
+		return kitchenOrders;
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public void populateWithFile(int line) throws IOException{
 		//Checks, if kitchen is still open
-		if (!this.isFinished()){
+		if (!this.isFinishedRun()){
 			try{
 				InputStream is = getClass().getResourceAsStream("resources/OrderInput.txt");
 		        //Gets line corresponding to argument value
@@ -175,12 +175,12 @@ public class OrderGenerator extends Observable{
 					int quantity = Integer.parseInt(parts[2].trim());
 					String item = parts[1].trim();
 					//The restaurant is assumed to have 6 tables and quantity must be at least 1
-					if(menuItemMap.containsItem(item) && ((numberOfTables+1)>table && table>0) && (quantity>0)){
-						Order o;
+					if(menuHashMap.containsItem(item) && ((numberOfTables+1)>table && table>0) && (quantity>0)){
+						ListOfOrders o;
 						try {
-							o = new Order(table, item, quantity);
+							o = new ListOfOrders(table, item, quantity);
 							//Checks, if order has been successfully added to orderTable
-							if(orderTable.addOrder(o))	{this.receiveOrder(o);
+							if(tableOrders.addOrder(o))	{this.receiveOrder(o);
 							} else{
 								String error = "Error in line " + line + " - There is no item called " 
 										+ item + " in the menu";
@@ -203,8 +203,8 @@ public class OrderGenerator extends Observable{
 	 * @throws InvalidPositiveInteger 
 	 */
 	public synchronized void populateWithGenerator() throws InvalidPositiveInteger {
-		Order o = this.generateRandomOrder();
-		if(orderTable.addOrder(o))	{
+		ListOfOrders o = this.generateRandomOrder();
+		if(tableOrders.addOrder(o))	{
 			this.receiveOrder(o);
 		}
 		setChanged();
@@ -216,11 +216,11 @@ public class OrderGenerator extends Observable{
 		hatchFinished = true;
 	}
 
-	public ArrayList<LinkedList<Order>> getListOfTables() {
+	public ArrayList<LinkedList<ListOfOrders>> getListOfTables() {
 		return tables;
 	}
 
-	public LinkedList<Order> getHatch() {
+	public LinkedList<ListOfOrders> getHatch() {
 		return hatch;
 	}
 	
@@ -235,7 +235,7 @@ public class OrderGenerator extends Observable{
 			report += "There are no orders to show";
 		}else {
 			int num = 1;
-			for (Order o : tables.get(i)) {
+			for (ListOfOrders o : tables.get(i)) {
 				report  += num++ + " " + o.getItemName() + " * " + o.getQuantity() + "\n";
 			}
 		}
@@ -245,8 +245,8 @@ public class OrderGenerator extends Observable{
 	/**
 	 * @return the menuItemMap
 	 */
-	public MenuItemMap getMenuItemMap() {
-		return menuItemMap;
+	public MenuHashMap getMenuItemMap() {
+		return menuHashMap;
 	}
 
 	/**
@@ -256,15 +256,15 @@ public class OrderGenerator extends Observable{
 		Thread kitchOrderThread = new Thread();
 		kitchOrderThread.start();
 
-		toKitchen firstStep = new toKitchen(this);
+		Kitchen firstStep = new Kitchen(this);
 		Thread sendToKitchen = new Thread(firstStep);
 		sendToKitchen.start();	
 
-		toHatch secondStep = new toHatch(this);
+		Hatch secondStep = new Hatch(this);
 		Thread sendToHatch = new Thread(secondStep);
 		sendToHatch.start();
 
-		toTables thirdStep = new toTables(this);
+		Tables thirdStep = new Tables(this);
 		Thread sendToTables = new Thread(thirdStep);
 		sendToTables.start();
 	}
@@ -276,7 +276,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public String getKitchenReport(){		
 		String report = "LIST OF ORDERS IN THE KITCHEN \r\n" + orderTitles;
-		for (Order ord: ordersInKitchen) {
+		for (ListOfOrders ord: kitchenOrders) {
 			report += ord.printShortInfo() + "\r\n";
 		}
 		return report;	
@@ -289,7 +289,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public String getHatchReport(){		
 		String report = "LIST OF ORDERS IN THE HATCH \r\n" + orderTitles;
-		for (Order ord: hatch) {
+		for (ListOfOrders ord: hatch) {
 			report += ord.printShortInfo() + "\r\n";
 		}
 		return report;	
@@ -300,9 +300,9 @@ public class OrderGenerator extends Observable{
 	 * Once this method is started, it should be allowed to finish.
 	 * @param o the order to be processed
 	 */
-	public synchronized void receiveOrder(Order o) {
-		ordersInKitchen.add(o);
-		log.addEntry("Order " + o.getOrderID()+ " ('" + o.getItemName() + "', x" + o.getQuantity()
+	public synchronized void receiveOrder(ListOfOrders o) {
+		kitchenOrders.add(o);
+		log.addEntry("ListOfOrders " + o.getOrderID()+ " ('" + o.getItemName() + "', x" + o.getQuantity()
 		+ ", table " + o.getTableID() + ") has been sent to the kitchen.\r\n" );
 
 		setChanged();
@@ -322,14 +322,14 @@ public class OrderGenerator extends Observable{
 	 * @return a random order.
 	 * @throws InvalidPositiveInteger
 	 */
-	public Order generateRandomOrder() throws InvalidPositiveInteger{
+	public ListOfOrders generateRandomOrder() throws InvalidPositiveInteger{
 		//Generates a random table number from 1 to 6.
 		Random r1 = new Random();
 		int t = r1.nextInt(6) + 1;
 		//Generates a random quantity from 1 to 10.
 		Random r2 = new Random();
 		int q = r2.nextInt(10)+1;
-		Order o = new Order (t, menuItemMap.getRandomItemName(),q);
+		ListOfOrders o = new ListOfOrders (t, menuHashMap.getRandomItemName(),q);
 		return o;
 	}
 
@@ -341,8 +341,8 @@ public class OrderGenerator extends Observable{
 		return populateMethod;
 	}
 
-	public Order getFirstOrder(){
-		return this.ordersInKitchen.getFirst();
+	public ListOfOrders getFirstOrder(){
+		return this.kitchenOrders.getFirst();
 	}
 
 	/**
@@ -350,11 +350,11 @@ public class OrderGenerator extends Observable{
 	 * notifies the observers and adds an entry in the Log file.
 	 */
 	public synchronized void orderToHatch() {
-		Order firstOrder = this.getFirstOrder();
+		ListOfOrders firstOrder = this.getFirstOrder();
 		this.hatch.add(firstOrder);
-		log.addEntry("Order " + firstOrder.getOrderID()+ " ('" + firstOrder.getItemName() + "', x" + firstOrder.getQuantity()
+		log.addEntry("ListOfOrders " + firstOrder.getOrderID()+ " ('" + firstOrder.getItemName() + "', x" + firstOrder.getQuantity()
 		+ ", table " + firstOrder.getTableID() + ") has been sent to the hatch.\r\n" );
-		ordersInKitchen.removeFirst();
+		kitchenOrders.removeFirst();
 		setChanged();
 		notifyObservers();
 		clearChanged();
@@ -365,7 +365,7 @@ public class OrderGenerator extends Observable{
 	 * @return true, if ordersInKitchen collection is empty, and false, if otherwise
 	 */
 	public boolean noOrdersInKitchen(){
-		if (ordersInKitchen.isEmpty()) {
+		if (kitchenOrders.isEmpty()) {
 			return true;
 		} else {
 			return false;
@@ -378,12 +378,12 @@ public class OrderGenerator extends Observable{
 	 */
 	public synchronized void orderToTable() {
 		if(!this.hatch.isEmpty()){
-			Order firstOrder = this.hatch.getFirst();
+			ListOfOrders firstOrder = this.hatch.getFirst();
 			tables.get(firstOrder.getTableID()-1).add(firstOrder);
-			log.addEntry("Order " + firstOrder.getOrderID()+ " ('" + firstOrder.getItemName() + "', x" + firstOrder.getQuantity()
+			log.addEntry("ListOfOrders " + firstOrder.getOrderID()+ " ('" + firstOrder.getItemName() + "', x" + firstOrder.getQuantity()
 			+ ", table " + firstOrder.getTableID() + ") has been sent to the table.\r\n" );
 			this.hatch.removeFirst();
-			if(ordersInKitchen.isEmpty() && hatch.isEmpty())	this.setHatchFinished();
+			if(kitchenOrders.isEmpty() && hatch.isEmpty())	this.setHatchFinished();
 			setChanged();
 			notifyObservers();
 			clearChanged();
@@ -397,7 +397,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public String reporter(){
 		String report = "";
-		report += menuItemMap.listByCategory();
+		report += menuHashMap.listByCategory();
 		report += "\nTABLE SUMMARY\n==============";
 		report += printBills();
 		report += this.frequencyReport();
@@ -409,7 +409,7 @@ public class OrderGenerator extends Observable{
 		report += "Cheapest table: Table " + lowestBill + ", whose bill is £" + String.format("%.2f", getTableTotal(lowestBill)) + "\n";
 		report += "The average bill paid is: £" + String.format("%.2f", this.averageBill()) + "\n";
 		report += "\nVEGETARIAN DISHES STATISTICS\n============================\n";
-		report += "Menu contains " + vegetarianDishes() + " veggie dishes out of " + menuItemMap.getNumberOfDishes() + "\n";
+		report += "Menu contains " + vegetarianDishes() + " veggie dishes out of " + menuHashMap.getNumberOfDishes() + "\n";
 		report += String.format("%.1f", vegetarianOrdersPercentage()) + "% of orders are vegetarian dishes";
 		return report;
 	}
@@ -471,13 +471,13 @@ public class OrderGenerator extends Observable{
 	 */
 	public double getTableTotal(int table){
 		double total = 0;
-		HashSet<Order> set = orderTable.findByTable(table);
+		HashSet<ListOfOrders> set = tableOrders.findByTable(table);
 		if(set!=null){
-			Iterator<Order> i = set.iterator();
-			Order temp = null;
+			Iterator<ListOfOrders> i = set.iterator();
+			ListOfOrders temp = null;
 			while(i.hasNext()){
 				temp = i.next();
-				total += menuItemMap.findByName(temp.getItemName()).getPrice() * temp.getQuantity();
+				total += menuHashMap.findByName(temp.getItemName()).getPrice() * temp.getQuantity();
 			}
 		}
 		return total;
@@ -511,9 +511,9 @@ public class OrderGenerator extends Observable{
 	 */
 	public int mostExpensiveTableBill(){
 		int table = 0;
-		if(!(orderTable.getOrderTable().isEmpty())){
+		if(!(tableOrders.getOrderTable().isEmpty())){
 			double max = 0;
-			for(Integer t : orderTable.getOrderTable().keySet()){
+			for(Integer t : tableOrders.getOrderTable().keySet()){
 				double price = getTableTotal(t);
 				if (price > max) {
 					max = price;
@@ -532,9 +532,9 @@ public class OrderGenerator extends Observable{
 	 */
 	public int cheapestTableBill(){
 		int table = 0;
-		if(!(orderTable.getOrderTable().isEmpty())){
-			double min = getTableTotal(orderTable.getOrderTable().firstKey());
-			for(Integer t : orderTable.getOrderTable().keySet()){
+		if(!(tableOrders.getOrderTable().isEmpty())){
+			double min = getTableTotal(tableOrders.getOrderTable().firstKey());
+			for(Integer t : tableOrders.getOrderTable().keySet()){
 				double price = getTableTotal(t);
 				if (price <= min) {
 					min = price;
@@ -552,9 +552,9 @@ public class OrderGenerator extends Observable{
 	 */
 	public double averageBill(){
 		double average = 0;
-		int numberOfTables = orderTable.getOrderTable().size();
-		if(!(orderTable.getOrderTable().isEmpty())){
-			for(Integer t : orderTable.getOrderTable().keySet()){
+		int numberOfTables = tableOrders.getOrderTable().size();
+		if(!(tableOrders.getOrderTable().isEmpty())){
+			for(Integer t : tableOrders.getOrderTable().keySet()){
 				average += getTableTotal(t);
 			}
 		}else
@@ -570,7 +570,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public String frequencyReport(){
 		String report = "\nFREQUENCY REPORT\n================\n";
-		report += orderTable.orderedItems();
+		report += tableOrders.orderedItems();
 		return report;
 	}
 
@@ -580,11 +580,11 @@ public class OrderGenerator extends Observable{
 	 */
 	public String dishesNotOrdered(){
 		String report = "\nDISHES NOT ORDERED\n==================\n";
-		if(menuItemMap.getNumberOfDishes()>0){
-			Iterator<String> it = menuItemMap.getMenuItemMap().keySet().iterator();
+		if(menuHashMap.getNumberOfDishes()>0){
+			Iterator<String> it = menuHashMap.getMenuItemMap().keySet().iterator();
 			while(it.hasNext()){
 				String temp = it.next();
-				if(!(orderTable.getFrequency().containsKey(temp))){
+				if(!(tableOrders.getFrequency().containsKey(temp))){
 					report += temp + "\n";
 				}
 			}
@@ -606,14 +606,14 @@ public class OrderGenerator extends Observable{
 	 */
 	public String getTableBill(int table){
 		String bill = "Sorry, there is no orders for table " + table + " yet.\n";
-		if(orderTable.getOrderTable().containsKey(table)){
+		if(tableOrders.getOrderTable().containsKey(table)){
 			bill = "\nTABLE " + table + "\n";
-			HashSet<Order> set = orderTable.getOrderTable().get(table);
-			Iterator<Order> i = set.iterator();
+			HashSet<ListOfOrders> set = tableOrders.getOrderTable().get(table);
+			Iterator<ListOfOrders> i = set.iterator();
 			while(i.hasNext()){
-				Order o = i.next();
+				ListOfOrders o = i.next();
 				bill += String.format("%-20s", o.getItemName().toUpperCase()) + String.format("%-2s", o.getQuantity()) + " * ";
-				double price = menuItemMap.findByName(o.getItemName()).getPrice();
+				double price = menuHashMap.findByName(o.getItemName()).getPrice();
 				bill += String.format("%5.2f", price) + " = " + String.format("%6.2f", price*o.getQuantity()) + "\n";
 			}
 			bill += String.format("%-33s", "") + "======\n";
@@ -632,7 +632,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public String printBills(){
 		String report = "";
-		for(Integer i : orderTable.getOrderTable().keySet()) {
+		for(Integer i : tableOrders.getOrderTable().keySet()) {
 			report += getTableBill(i);
 		}
 		return report;
@@ -644,7 +644,7 @@ public class OrderGenerator extends Observable{
 	 */
 	public int vegetarianDishes(){
 		int amount = 0;
-		Iterator<MenuItem> it = menuItemMap.getMenuItemMap().values().iterator();
+		Iterator<ListOfMenu> it = menuHashMap.getMenuItemMap().values().iterator();
 		while(it.hasNext()){
 			if(it.next().isVegetarianPrint().equals("(V)"))
 				amount++;
@@ -659,11 +659,11 @@ public class OrderGenerator extends Observable{
 	public double vegetarianOrdersPercentage(){
 		int total = 0;
 		int veggies = 0;
-		Iterator<Entry<String, Integer>> it = orderTable.getFrequency().entrySet().iterator();
+		Iterator<Entry<String, Integer>> it = tableOrders.getFrequency().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String,Integer> pair = (Entry<String, Integer>)it.next();
 			total += pair.getValue();
-			if(menuItemMap.findByName(pair.getKey()).isVegetarianPrint().equals("(V)"))
+			if(menuHashMap.findByName(pair.getKey()).isVegetarianPrint().equals("(V)"))
 				veggies += pair.getValue();
 		}
 		if(total>0){

@@ -9,15 +9,15 @@ import java.util.Arrays;
 /**
  * A class for scanning the menu input text file.
  */
-public class MenuScanner {
-	private MenuItemMap menuEntries;
+public class CheckMenu {
+	private MenuHashMap menuEntries;
 	//String array containing all the valid MenuItem categories.
 	private static final String [] categories = new String[]{"Starter","Main", "Side", "Dessert", "Drink"};
 	
 
-    public MenuScanner()  {
+    public CheckMenu()  {
     	//Initialises empty Treemap of menu items.
-        menuEntries = new MenuItemMap();
+        menuEntries = new MenuHashMap();
         
         BufferedReader buff = null;
         InputStream is = null;
@@ -48,8 +48,8 @@ public class MenuScanner {
 	    			//and an error message is shown.
 	    			if (!valid_category){
 	    				try {
-							throw new InvalidCategory(data[2]);
-						} catch (InvalidCategory ic) {
+							throw new CheckCategory(data[2]);
+						} catch (CheckCategory ic) {
 							System.out.println(ic.getMessage());
 						}
 	    			
@@ -57,7 +57,7 @@ public class MenuScanner {
 	    			} else if (data[3].toLowerCase().equals("true")||data[3].toLowerCase().equals("false")){
 	    				boolean is_veg = Boolean.parseBoolean(data[3]);
 	    				//Creates a MenuItem object.
-	    				MenuItem m = new MenuItem(data[0], price, data[2], is_veg, time);
+	    				ListOfMenu m = new ListOfMenu(data[0], price, data[2], is_veg, time);
 	    				//Adds the newly created MenuItem to the MenuItemMap menuEntries.
 	    				menuEntries.addItem(m);
 	    				
@@ -73,7 +73,7 @@ public class MenuScanner {
 	    		} catch (ArrayIndexOutOfBoundsException aoe) {
 	    			System.out.println("Not enough information on line " + line_count + " to add data.");
 	    			inputLine = buff.readLine();
-	    		} catch (DuplicateMenuItem e) {
+	    		} catch (CheckMenuList e) {
 					System.out.println(e.getMessage());
 	    			inputLine = buff.readLine();
 				}
@@ -102,7 +102,7 @@ public class MenuScanner {
      * Returns the MenuItemMap created from the scanned menu input file.
      * @return MenuItemMap containing all the scanned MenuItem-s.
      */
-    public MenuItemMap getMenuEntries(){
+    public MenuHashMap getMenuEntries(){
     	return menuEntries;
     }
     

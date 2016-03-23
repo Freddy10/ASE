@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 * about each item ordered by a certain table, including its ID number, table, name
 * and quantity requested.
 */
-public class Order implements Comparable<Order> {
+public class ListOfOrders implements Comparable<ListOfOrders> {
 
 	// INSTANCE VARIABLES
 	/** 
@@ -39,7 +39,7 @@ public class Order implements Comparable<Order> {
 	 * @param q	 Quantity of items
 	 * @throws InvalidPositiveInteger
 	 */
-	public Order(int t, String i, int q) throws InvalidPositiveInteger {
+	public ListOfOrders(int t, String i, int q) throws InvalidPositiveInteger {
 		// OrderID generated using Singleton pattern
 		OrderID last = OrderID.getInstance();
 		orderID = last.getNext();
@@ -54,7 +54,7 @@ public class Order implements Comparable<Order> {
 	 * Returns the whole Order object
 	 * @return the Order object
 	 */
-	public Order getOrder() {
+	public ListOfOrders getOrder() {
 		return this;
 	}
 	
@@ -139,7 +139,7 @@ public class Order implements Comparable<Order> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-    public int compareTo(Order comp) {
+    public int compareTo(ListOfOrders comp) {
         int compareTable = comp.getTableID();
         return this.getTableID() - compareTable;
     }
@@ -171,10 +171,10 @@ public class Order implements Comparable<Order> {
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof Order)) {
+		if (!(obj instanceof ListOfOrders)) {
 			return false;
 		}
-		Order other = (Order) obj;
+		ListOfOrders other = (ListOfOrders) obj;
 		if (itemName == null) {
 			if (other.itemName != null) {
 				return false;

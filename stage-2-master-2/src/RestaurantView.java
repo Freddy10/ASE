@@ -20,28 +20,28 @@ import javax.swing.JTextField;
 
 
 
-public class MVCRestaurantView extends JFrame implements Observer {
+public class RestaurantView extends JFrame implements Observer {
 
 	/**
 	 * Instance variables for GUI
 	 */
-	private JTextArea kitchenOrders;
-	private JTextArea hatchOrders;
-	private JTextArea [] tableDisplay;
+	private JTextArea kitchen;
+	private JTextArea hatch;
+	private JTextArea [] tableRow;
 	protected JTextField discountField;
-	private JScrollPane scrollDown;
-	private JButton getBill, startSimulation, close; 
+	private JScrollPane scrollBar;
+	private JButton getReceipt, startProgram, closeProgram; 
 	private JComboBox <String> dishes;
 	private JComboBox <String> kitchOpen;
 	protected JComboBox<String> tables;
 	
-	private OrderGenerator model;
+	private RestaurantModel model;
 	private int numOfTables;
 		  
     /**
      * Create the frame with its panels.
      */
-    public MVCRestaurantView(OrderGenerator model){            
+    public RestaurantView(RestaurantModel model){            
         //set up window title
         setTitle("Kitchen Orders Simulation");
         //To ensure that when window is closed program ends
@@ -62,32 +62,40 @@ public class MVCRestaurantView extends JFrame implements Observer {
          */
         JPanel centrePanel = new JPanel();
       	//centrePanel.add(new JLabel("Kitchen Orders")); 
-      	kitchenOrders = new JTextArea(20, 50);
-      	kitchenOrders.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-      	kitchenOrders.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
-  		hatchOrders = new JTextArea(20, 50);
-  		hatchOrders.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-  		hatchOrders.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
-      	kitchenOrders.setEditable(false);
-      	kitchenOrders.setText("LIST OF ORDERS IN THE KITCHEN");
-      	hatchOrders.setEditable(false);
-      	hatchOrders.setText("LIST OF ORDERS IN THE HATCH");
-      	centrePanel.add(kitchenOrders);
-        centrePanel.add(hatchOrders);
+      	kitchen = new JTextArea(10, 30);
+      	kitchen.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+      	kitchen.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
+      	
+      	//JPanel hatchPanel = new JPanel();
+      	
+      	
+      	
+      	
+  		hatch = new JTextArea(10, 30);
+  		hatch.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+  		hatch.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
+  		
+      	kitchen.setEditable(false);
+      	kitchen.setText("KITCHEN ORDERS LIST");
+      	
+      	hatch.setEditable(false);
+      	hatch.setText("HATCH ORDERS LIST");
+      	centrePanel.add(kitchen);
+        centrePanel.add(hatch);
                
         //create container and add centre panel to content pane     
         Container contentPane = getContentPane();
         contentPane.add(centrePanel, BorderLayout.WEST);
        
         //add scroll pane to content pane     
-        scrollDown = new JScrollPane();
-        centrePanel.add(scrollDown,BorderLayout.CENTER);            
+        scrollBar = new JScrollPane();
+        centrePanel.add(scrollBar,BorderLayout.CENTER);            
             
         //set up south panel containing a buttons and a combo boxes
          JPanel southPanel = new JPanel();
          
-         startSimulation = new JButton ("Start");
-         southPanel.add(startSimulation);
+         startProgram = new JButton ("Start");
+         southPanel.add(startProgram);
          
          //Add combo box to select orders from either text file or randomly and label
          southPanel.add(new JLabel("Kitchen open (sec):"));  
@@ -126,11 +134,11 @@ public class MVCRestaurantView extends JFrame implements Observer {
         southPanel.add(new JLabel("Discount (%)"));   
         discountField = new JTextField(3);
         southPanel.add(discountField);
-        getBill = new JButton("Get Bill");
-        getBill.setEnabled(false);
-        southPanel.add(getBill);
-        close = new JButton("Close application");   
-        southPanel.add(close);
+        getReceipt = new JButton("Get Bill");
+        getReceipt.setEnabled(false);
+        southPanel.add(getReceipt);
+        closeProgram = new JButton("Close application");   
+        southPanel.add(closeProgram);
         //getBill.setEnabled(false);
         contentPane.add(southPanel, BorderLayout.SOUTH);
 
@@ -143,14 +151,14 @@ public class MVCRestaurantView extends JFrame implements Observer {
        private JPanel customTabDisplay() {
     	//cheating - know there are 6 customers
     	JPanel customTablePanel = new JPanel(new GridLayout (3,2));
-		tableDisplay  = new JTextArea [6];
+		tableRow  = new JTextArea [6];
 		for (int i = 0; i < 6; i++){ 
-			tableDisplay [i]= new JTextArea(10,30);
+			tableRow [i]= new JTextArea(10,30);
 			//monospaced allows nice tabular layout
-			tableDisplay[i].setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
-			tableDisplay [i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
-			tableDisplay[i].setLineWrap(true); 
-			customTablePanel.add(tableDisplay[i]);
+			tableRow[i].setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+			tableRow [i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
+			tableRow[i].setLineWrap(true); 
+			customTablePanel.add(tableRow[i]);
 		}
 		return customTablePanel;
 		
@@ -159,15 +167,15 @@ public class MVCRestaurantView extends JFrame implements Observer {
     ///////////////// MVC pattern - allows listeners to be added
        
     public void kitchenOrderListener(ActionListener a) {
-    	startSimulation.addActionListener(a);
+    	startProgram.addActionListener(a);
     }
     
     public void orderBillListener(ActionListener a) {
-    	getBill.addActionListener(a);
+    	getReceipt.addActionListener(a);
     }
     
     public void closerListener(ActionListener a) {
-    	close.addActionListener(a);
+    	closeProgram.addActionListener(a);
     }
     
     /////////////////
@@ -194,14 +202,14 @@ public class MVCRestaurantView extends JFrame implements Observer {
      * Enables the Get Bill button in the GUI.
      */
     public void enableGetBillButton(){
-    	getBill.setEnabled(true);
+    	getReceipt.setEnabled(true);
     }
     
     /**
      * Disables the Start button in the GUI.
      */
     public void disableStartButton(){
-    	startSimulation.setEnabled(false);
+    	startProgram.setEnabled(false);
     }
     
     //Required methods for the Observer pattern
@@ -209,14 +217,14 @@ public class MVCRestaurantView extends JFrame implements Observer {
      * Updates the GUI.
      */
     public synchronized void update(Observable o,  Object args) {
-       	this.kitchenOrders.setText(model.getKitchenReport());
-    	this.hatchOrders.setText(model.getHatchReport());
+       	this.kitchen.setText(model.getKitchenReport());
+    	this.hatch.setText(model.getHatchReport());
     	for (int i = 0; i < model.getListOfTables().size(); i++) {
     		String report = model.getOrderList(i);
-    		this.tableDisplay[i].setText(report);
+    		this.tableRow[i].setText(report);
     	}
     	//Enables the "Get Bill" button, if the simulation has finished.
-    	if (model.getSimFinished()){getBill.setEnabled(true);}
+    	if (model.getThreadFinished()){getReceipt.setEnabled(true);}
     }
 }
     

@@ -4,7 +4,7 @@
 * Manager class is responsible for creating each component of the project's
 * MVC architecture: GUI as view, the different collections as model and a
 * controller class which joins view and model.
-
+**/
 public class Manager {
 	
 	/**
@@ -19,8 +19,8 @@ public class Manager {
 	 */
 	public void run(){
 		RestaurantModel model = new RestaurantModel();
-		MVCRestaurantView view = new MVCRestaurantView(model);
-		MVCRestaurantController controller = new MVCRestaurantController(model, view);   
+		RestaurantView view = new RestaurantView(model);
+		RestaurantController controller = new RestaurantController(model, view);   
 		view.setVisible(true);
 
 	}	

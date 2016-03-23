@@ -15,14 +15,14 @@ import java.util.TreeMap;
 * number of times each item of menu has been ordered will be registered.
 
 */
-public class OrderTable {
+public class TableOrders {
 	
 	/**
 	 * Collection of all the orders managed by the application. It contains numbers
 	 * of tables as values and their corresponding set of Orders as values in a
 	 * HashSet, thus avoiding repeated values.
 	 */
-	private TreeMap<Integer,HashSet<Order>> orderTable;
+	private TreeMap<Integer,HashSet<ListOfOrders>> orderTable;
 	
 	/**
 	 * Collection mapping items names with the number of times each one has been
@@ -33,8 +33,8 @@ public class OrderTable {
 	/**
 	 * Class constructor
 	 */
-	public OrderTable() {
-		orderTable = new TreeMap<Integer,HashSet<Order>>();
+	public TableOrders() {
+		orderTable = new TreeMap<Integer,HashSet<ListOfOrders>>();
 		frequency = new HashMap<String, Integer>();
 	}
 	
@@ -44,7 +44,7 @@ public class OrderTable {
 	 * @return 	the TreeMap with table numbers as keys and HashSet of orders as
 	 * 			values
 	 */
-	public TreeMap<Integer, HashSet<Order>> getOrderTable() {
+	public TreeMap<Integer, HashSet<ListOfOrders>> getOrderTable() {
 		return orderTable;
 	}
 
@@ -64,15 +64,15 @@ public class OrderTable {
 	 * @return	the Order object if identifier number has been found
 	 * @throws NoMatchingOrderID if the specified ID is not found
 	 */
-	public Order findByID(String id) throws NoMatchingOrderID{
+	public ListOfOrders findByID(String id) throws NoMatchingOrderID{
 		if(validateOrderID(id)){
-			Collection<HashSet<Order>> c = orderTable.values();
-			Iterator<HashSet<Order>> i = c.iterator();
+			Collection<HashSet<ListOfOrders>> c = orderTable.values();
+			Iterator<HashSet<ListOfOrders>> i = c.iterator();
 			boolean success = false;
 			while(i.hasNext() && !success) {
-				Iterator<Order> j = i.next().iterator();
+				Iterator<ListOfOrders> j = i.next().iterator();
 				while(j.hasNext() && !success){
-					Order o = j.next();
+					ListOfOrders o = j.next();
 					if(o.getOrderID().equals(id))
 						return o; 
 				}
@@ -89,7 +89,7 @@ public class OrderTable {
 	 * @return	a HashSet of orders if table number exists. If not, returns 
 	 * 			null and shows an error message
 	 */
-	public HashSet<Order> findByTable(int table){
+	public HashSet<ListOfOrders> findByTable(int table){
 		if(orderTable.containsKey(table))
 			return orderTable.get(table);
 		else{
@@ -104,15 +104,15 @@ public class OrderTable {
 	 * @return	A ArrayList of orders where the item is found. If the item is
 	 * 			not found in any order, return null and an error message
 	 */
-	public ArrayList<Order> findByMenuItem(String item){
-		ArrayList<Order> orders = new ArrayList<Order>();
-		Collection<HashSet<Order>> c = orderTable.values();
-		Iterator<HashSet<Order>> i = c.iterator();
+	public ArrayList<ListOfOrders> findByMenuItem(String item){
+		ArrayList<ListOfOrders> orders = new ArrayList<ListOfOrders>();
+		Collection<HashSet<ListOfOrders>> c = orderTable.values();
+		Iterator<HashSet<ListOfOrders>> i = c.iterator();
 		boolean success = false;
 		while(i.hasNext()) {
-			Iterator<Order> j = i.next().iterator();
+			Iterator<ListOfOrders> j = i.next().iterator();
 			while(j.hasNext()){
-				Order o = j.next();
+				ListOfOrders o = j.next();
 				if(o.getItemName().equals(item)){
 					success = true;
 					orders.add(o); 
@@ -133,11 +133,11 @@ public class OrderTable {
 	 * an entry for that item in the frequencies collection, or updates its existing one.
 	 * @param o	The new order to be added
 	 */
-	public boolean addOrder(Order o){
+	public boolean addOrder(ListOfOrders o){
 		Integer i = new Integer(o.getTableID());
 		String itemName = o.getItemName();
-		HashSet<Order> set = orderTable.get(i);
-		if(set==null) set = new HashSet<Order>();
+		HashSet<ListOfOrders> set = orderTable.get(i);
+		if(set==null) set = new HashSet<ListOfOrders>();
 		if(set.add(o)){
 			orderTable.put(i, set);
 			Integer value = frequency.putIfAbsent(itemName, o.getQuantity());
@@ -161,14 +161,14 @@ public class OrderTable {
 	 */
 	public void removeOrder(String id) throws NoMatchingOrderID{
 		if(validateOrderID(id)){
-			Collection<HashSet<Order>> c = orderTable.values();
-			Iterator<HashSet<Order>> i = c.iterator();
+			Collection<HashSet<ListOfOrders>> c = orderTable.values();
+			Iterator<HashSet<ListOfOrders>> i = c.iterator();
 			boolean success = false;
 			while(i.hasNext() && !success) {
-				HashSet<Order> set = i.next();
-				Iterator<Order> j = set.iterator();
+				HashSet<ListOfOrders> set = i.next();
+				Iterator<ListOfOrders> j = set.iterator();
 				while(j.hasNext() && !success){
-					Order o = j.next();
+					ListOfOrders o = j.next();
 					if(o.getOrderID().equals(id)){
 						success = set.remove(o);
 						Integer value = frequency.get(o.getItemName());
@@ -195,8 +195,8 @@ public class OrderTable {
 	 */
 	public int getNumberOfOrders(){
 		int total = 0;
-		Collection<HashSet<Order>> c = orderTable.values();
-		Iterator<HashSet<Order>> i = c.iterator();
+		Collection<HashSet<ListOfOrders>> c = orderTable.values();
+		Iterator<HashSet<ListOfOrders>> i = c.iterator();
 		while(i.hasNext()) {
 			total += i.next().size();
 		}
@@ -211,10 +211,10 @@ public class OrderTable {
 	public String listAllOrders(){
 		String summary = "";
 		if(!orderTable.isEmpty()){
-			Collection<HashSet<Order>> set = orderTable.values();
-			Iterator<HashSet<Order>> i = set.iterator();
+			Collection<HashSet<ListOfOrders>> set = orderTable.values();
+			Iterator<HashSet<ListOfOrders>> i = set.iterator();
 			while(i.hasNext()){
-				Iterator<Order> io = i.next().iterator();
+				Iterator<ListOfOrders> io = i.next().iterator();
 				while(io.hasNext())
 					summary += io.next().printInfo() + "\n";
 			}

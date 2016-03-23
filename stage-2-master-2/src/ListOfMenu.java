@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
  *  A simple class to manage the details (name, price, category, whether is vegetarian)
  *  of the items on the menu.
  */
-public class MenuItem {
+public class ListOfMenu {
 	
 	private String itemName;       
 	private double itemPrice;
@@ -21,7 +21,7 @@ public class MenuItem {
 	 * @param category        Category of the menu item
 	 * @param is_vegetarian   Whether the menu item is vegetarian (true) or not (false)
 	 */
-	public MenuItem(String name, double price, String category, boolean is_vegetarian, int time){
+	public ListOfMenu(String name, double price, String category, boolean is_vegetarian, int time){
 		itemName = name;
 		itemPrice = price;
 		this.category = category;
@@ -99,8 +99,8 @@ public class MenuItem {
     @Override
 	public boolean equals(Object other)
     {
-        if(other instanceof MenuItem) {
-            MenuItem otherMenuItem = (MenuItem) other;
+        if(other instanceof ListOfMenu) {
+            ListOfMenu otherMenuItem = (ListOfMenu) other;
             return itemName.equals(otherMenuItem.getName());
         }
         else {
@@ -115,7 +115,7 @@ public class MenuItem {
      * @return a negative integer if the itemName comes before the parameter's itemName,
      *         zero, if they are equal, and a positive integer, if it comes after the other.
      */
-    public int compareByNameTo(MenuItem otherMenuItem)
+    public int compareByNameTo(ListOfMenu otherMenuItem)
     {
         return itemName.compareTo(otherMenuItem.getName());
     }    
@@ -128,7 +128,7 @@ public class MenuItem {
      *         zero, if they are equal, and a positive integer, if it comes after the other.
      *         If two are equal, they will be ordered alphabetically/
      */
-    public int compareByCategoryTo(MenuItem otherMenuItem)
+    public int compareByCategoryTo(ListOfMenu otherMenuItem)
     {
         return itemName.compareTo(otherMenuItem.getCategory());
     }    

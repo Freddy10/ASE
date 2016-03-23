@@ -4,18 +4,18 @@ import java.io.UnsupportedEncodingException;
 
 public class LogFile {
 	
-	private static final Log instance = new Log();
+	private static final LogFile instance = new LogFile();
 	private String logText;
 	
 	//private constructor
-	private Log(){
+	private LogFile(){
 		logText = "THE DAILY LOG \r\n";
 	}
 	
 	/**
 	 * Returns the current version of the Log class instance.
 	 */
-	public static Log getInstance(){
+	public static LogFile getInstance(){
 		return instance;
 	}
 	

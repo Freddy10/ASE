@@ -3,17 +3,17 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class listOfMenuTest {
+public class ListOfMenuTest {
 
 	@Test
 	public void testEqualsObject() {
 		//Multiple instances of MenuItem class for testing
-		MenuItem t1 = new MenuItem("carrots", 2.50, "Side", true, 10);
-		MenuItem t2 = new MenuItem("carrots", 2.50, "Side", true, 10);
-		MenuItem t3 = new MenuItem("carrots", 2.50, "Main", true, 10);
-		MenuItem t4 = new MenuItem("carrots", 2.50, "Side", false, 10);
-		MenuItem t5 = new MenuItem("peas", 2.50, "Side", true, 8);
-		MenuItem t6 = new MenuItem("mash", 3.50, "Side", true, 5);
+		ListOfMenu t1 = new ListOfMenu("carrots", 2.50, "Side", true, 10);
+		ListOfMenu t2 = new ListOfMenu("carrots", 2.50, "Side", true, 10);
+		ListOfMenu t3 = new ListOfMenu("carrots", 2.50, "Main", true, 10);
+		ListOfMenu t4 = new ListOfMenu("carrots", 2.50, "Side", false, 10);
+		ListOfMenu t5 = new ListOfMenu("peas", 2.50, "Side", true, 8);
+		ListOfMenu t6 = new ListOfMenu("mash", 3.50, "Side", true, 5);
 
 		boolean result1 = t1.equals(t2);
 		assertEquals(true, result1);
@@ -37,10 +37,10 @@ public class listOfMenuTest {
 	@Test
 	public void testCompareByNameTo() {
 		//Multiple instances of MenuItem class for testing
-		MenuItem t1 = new MenuItem("carrots", 2.50, "Side", true, 10);
-		MenuItem t2 = new MenuItem("cabbage", 2.50, "Side", true, 9);
-		MenuItem t3 = new MenuItem("peas", 2.50, "Side", true, 8);
-		MenuItem t4 = new MenuItem("mash", 3.50, "Side", true, 5);
+		ListOfMenu t1 = new ListOfMenu("carrots", 2.50, "Side", true, 10);
+		ListOfMenu t2 = new ListOfMenu("cabbage", 2.50, "Side", true, 9);
+		ListOfMenu t3 = new ListOfMenu("peas", 2.50, "Side", true, 8);
+		ListOfMenu t4 = new ListOfMenu("mash", 3.50, "Side", true, 5);
 
 		int result1 = t1.compareByNameTo(t2);
 		assertEquals(16, result1);
@@ -55,8 +55,8 @@ public class listOfMenuTest {
 	@Test
 	public void testIsVegetarianPrint() {
 		//Multiple instances of MenuItem class for testing
-		MenuItem t1 = new MenuItem("carrots", 2.50, "Side", true, 10);
-		MenuItem t2 = new MenuItem("pasta", 5.50, "Main", false, 8);
+		ListOfMenu t1 = new ListOfMenu("carrots", 2.50, "Side", true, 10);
+		ListOfMenu t2 = new ListOfMenu("pasta", 5.50, "Main", false, 8);
 
 		String result1 = t1.isVegetarianPrint();
 		assertEquals("(V)", result1);

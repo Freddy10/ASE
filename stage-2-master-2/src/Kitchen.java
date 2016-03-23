@@ -1,14 +1,14 @@
 import java.io.IOException;
 
-public class toKitchen implements Runnable {
+public class Kitchen implements Runnable {
 	
-	private OrderGenerator kitchen;
+	private RestaurantModel kitchen;
 	//Duration for which the kitchen is open (msec)
 	private int kitchOpenTime;
 	//The current line in the order input file
 	private int line;
 	
-	public toKitchen(OrderGenerator k){
+	public Kitchen(RestaurantModel k){
 		kitchen = k;
 		line = 0;
 		kitchOpenTime = 0;
@@ -39,7 +39,7 @@ public class toKitchen implements Runnable {
 					e1.printStackTrace();
 				}
 			} 
-			if(!kitchen.isSimulationActive())	kitchen.setStartSimulation();
+			if(!kitchen.isThreadActive())	kitchen.setStartThread();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -47,6 +47,6 @@ public class toKitchen implements Runnable {
 			}
 		}
 		System.out.println("The kitchen is closing.");
-    	kitchen.setFinished();
+    	kitchen.setFinishedRun();
 	}
 }

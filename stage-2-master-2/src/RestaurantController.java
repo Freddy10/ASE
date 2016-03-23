@@ -4,12 +4,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 
-public class MVCRestaurantController{
+public class RestaurantController{
 	
-	private OrderGenerator model;
-	private MVCRestaurantView view;
+	private RestaurantModel  model;
+	private RestaurantView view;
 	
-	public MVCRestaurantController (OrderGenerator m, MVCRestaurantView v){
+	public RestaurantController (RestaurantModel m, RestaurantView v){
 		model = m;
 		view = v;
 		view.kitchenOrderListener(new restaurantController());

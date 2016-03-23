@@ -11,12 +11,12 @@ import java.util.TreeMap;
 /**
  * A class for storing the items on the menu (MenuItem-s).
  */
-public class MenuItemMap {
+public class MenuHashMap {
 	
-	private TreeMap<String, MenuItem> menuItemMap;
+	private TreeMap<String, ListOfMenu> menuItemMap;
 
-	public MenuItemMap(){
-		menuItemMap = new TreeMap<String, MenuItem>();    
+	public MenuHashMap(){
+		menuItemMap = new TreeMap<String, ListOfMenu>();    
 	}
 	/**
 	 * Returns the value (the MenuItem/null) corresponding to the provided key.
@@ -24,8 +24,8 @@ public class MenuItemMap {
 	 * @return the value (MenuItem, if present in MenuItemMap, or null, if not) 
 	 * corresponding to the key provided.
 	 */
-	public MenuItem findByName(String item_name){
-		MenuItem item = menuItemMap.get(item_name);
+	public ListOfMenu findByName(String item_name){
+		ListOfMenu item = menuItemMap.get(item_name);
 		return item;
 	}
 	
@@ -34,7 +34,7 @@ public class MenuItemMap {
 	 * as keys.
 	 * @return the TreeMap <String, MenuItem> containing all the MenuItem-s.
 	 */
-	public TreeMap<String, MenuItem> getMenuItemMap(){
+	public TreeMap<String, ListOfMenu> getMenuItemMap(){
 		return menuItemMap;
 	}
 	
@@ -43,12 +43,12 @@ public class MenuItemMap {
 	 * @param new_item the new MenuItem to be added.
 	 * @throws DuplicateMenuItem 
 	 */
-	public void addItem(MenuItem new_item) throws DuplicateMenuItem {
+	public void addItem(ListOfMenu new_item) throws CheckMenuList {
 		String name = new_item.getName();
 		
 		if (findByName(name)!=null){
 			
-			throw new DuplicateMenuItem(name);
+			throw new CheckMenuList(name);
 			//String error = "Could not add '" + name + "'. Duplicate value.";
 			//System.out.println(error);
 		} 
@@ -88,7 +88,7 @@ public class MenuItemMap {
 	      // Display elements
 	      while(i.hasNext()) {
 	         Map.Entry me = (Map.Entry)i.next();
-	         MenuItem m = (MenuItem) me.getValue();
+	         ListOfMenu m = (ListOfMenu) me.getValue();
 	         menu += "\r\n" + m.printItemSummary();
 	      }
 		return menu;
@@ -120,7 +120,7 @@ public class MenuItemMap {
 	     */
 	    while(iterator.hasNext()) {
 		       Map.Entry me = (Map.Entry)iterator.next();
-		       MenuItem m = (MenuItem) me.getValue();
+		       ListOfMenu m = (ListOfMenu) me.getValue();
 		       String categ = m.getCategory().toLowerCase();
 		       if (categ.equals("starter")){
 		    	   starters += "    " + m.printItemSummary() + "\r\n";
