@@ -1,11 +1,7 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-/**
-* <h1>OrderGeneratorTest</h1>
-* This class consists of different JUnit cases to test several methods of Aggregator class
-*
-*/
+
 public class RestaurantModelTest {
 
 	private static final double DELTA = 1e-15;

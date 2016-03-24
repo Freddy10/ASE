@@ -1,0 +1,28 @@
+Scallop;              3.00;     Starter;     true;	4
+Oyster;		          2.50;     Starter;     false;	2
+Rockpool;             4.00;     Starter;     false;	9
+Game Terrine;         3.50;     Starter;     false;	8                 
+Halibut;              25.00;    Main;        false;	10
+Mushroom risotto;     12.50;    Main;        true;	8
+Sea bass;             14.00;    Main;        false;	11
+Lamb;        		  14.50;    Main;        false;	14
+Monkfish;             15.00;    Main;        false;	8
+Mallard				  20.00;	Main;		 false; 8
+Curly Fries;		  5.00;		Side;		 true;  2
+Potato Wedges;		  5.00;		Side;		 true;  2
+Coleslaw;             5.00;		Side;		 true;  2
+Pumpkin;         	  1.50;     Dessert;     true;	2
+Sea Buckthorn;        3.50;     Dessert;     true;	3
+Chocolate & Orange;   3.50;     Dessert;     true;	6
+Pistachio;     		  4.00;     Dessert;     true;	4
+Caramel and Apple;	  3.50;     Dessert;     true;	6
+Cheese;               3.50;     Dessert;     false;	6
+Coffee;               2.00;     Drink;       true;	1
+Tea;                  1.50;     Drink;       true;	2
+Water;      		  2.50;     Drink;       true;	1
+Juice;                2.50;     Drink;       true;	2
+Chocolate;            2.50;     Drink;       true;	2
+Wahaca Blanco;        2.50;     Drink;       true;	2
+Pinot Grigio;         2.50;     Drink;       true;	1
+Sauvignon Blanc;	  2.50;     Drink;       true;	1
+Tempranillo;   		  2.50;     Drink;       true;	1    

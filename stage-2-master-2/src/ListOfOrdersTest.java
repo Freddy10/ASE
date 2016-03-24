@@ -1,11 +1,7 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-/**
-* <h1>OrderTest</h1>
-* This class consists of different JUnit cases to test several methods of Order class
 
-*/
 public class ListOfOrdersTest {
 
 	@Test

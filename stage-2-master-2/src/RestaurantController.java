@@ -25,8 +25,8 @@ public class RestaurantController{
 	    	String popValue = view.getPopulateMethod();
 	    	model.setPopulateMethod(popValue);
 	    	//Gets the length of time the kitchen will be open from the GUI.
-	    	String durValue = view.getKitchOpenTime();
-	    	model.setKitchOpenTime(durValue);
+	    	String openTime = "20";
+	    	model.setKitchOpenTime(openTime);
 			model.start();
 			view.disableStartButton();
 	    }
@@ -39,10 +39,10 @@ public class RestaurantController{
 	    	javax.swing.UIManager.put("OptionPane.messageFont", new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	    	try{
 				String numberText = view.tables.getSelectedItem().toString().substring(1);
-				String discountText = view.discountField.getText().trim();
+				String discountText = "10";
 				if(!discountText.equals("")){
 					if(Integer.parseInt(discountText) < 0 || Integer.parseInt(discountText) > 100){
-						String error = "Provided discount is not a correct percentage";
+						String error = "discount  not  correct";
 						JOptionPane.showMessageDialog(view, error, "Bill could not be generated", JOptionPane.ERROR_MESSAGE);
 					}else
 						JOptionPane.showMessageDialog(view, model.generateBill(numberText, discountText), "Bill for TABLE " + numberText, JOptionPane.PLAIN_MESSAGE);
@@ -50,8 +50,8 @@ public class RestaurantController{
 					JOptionPane.showMessageDialog(view, model.generateBill(numberText, discountText), "Bill for TABLE " + numberText, JOptionPane.PLAIN_MESSAGE);
 	    	}
 			catch (NumberFormatException nfe) {
-				String error = "Number conversion error.\nPlease, make sure you've used numbers as discount";
-				JOptionPane.showMessageDialog(view, error, "Bill could not be generated", JOptionPane.ERROR_MESSAGE);
+				String error = "error.\nPlease use number as discount value";
+				JOptionPane.showMessageDialog(view, error, "Bill not generated", JOptionPane.ERROR_MESSAGE);
 			}
 	    }
 	 }
@@ -60,7 +60,7 @@ public class RestaurantController{
 	{	
 	    public void actionPerformed(ActionEvent ae) 
 	    { 
-	    	model.writer("Report.txt", model.reporter());
+	    	model.writer("writeToReport.txt", model.reporter());
 			System.exit(0);
 	    }
 	 }

@@ -1,12 +1,7 @@
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-/**
- * <h1>OrderID</h1>
- * Following the Singleton pattern, this class is responsible for allocating correct
- * sequence numbers to each order. It stores the last identifier assigned and avoids
- * two different threads creating an order with identical identifier at the same time.
- */
+
 public class OrderID {
 
 	private static OrderID instance;
@@ -14,7 +9,7 @@ public class OrderID {
 	private String lastID;
 
 	private OrderID(){
-		lastID = "O00000000";
+		lastID = "O0";
 	}
 
 	public static synchronized OrderID getInstance(){

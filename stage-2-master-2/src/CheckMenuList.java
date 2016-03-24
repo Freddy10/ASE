@@ -1,7 +1,7 @@
 
 public class CheckMenuList extends Exception {
 	
-	public CheckMenuList(String duplicate_item){
-		super("Duplicate menu item: " + duplicate_item);
+	public CheckMenuList(String same_item){
+		super("Same menu item: " + same_item);
 	}
 }

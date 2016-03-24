@@ -1,0 +1,23 @@
+1; 	Scallop;			2
+2;	Oyster;				1
+1;	Rockpool;			2
+1;	Monkfish;			3
+1;	Game Terrine;		1
+4;	Cheese;				3
+4;	Pistachio;			4
+4;	Roe Deer;			2
+1;	Lamb;				2
+3;	Monkfish;			1
+2;	Pumpkin;			2
+3;	Pumpkin;			2
+4;	Caramel and Apple;	2
+6;	Coffee;				3		
+3;	Chocolate & Orange;	1
+5;	Water;				5
+3;	Juice;				4
+1;	Wahaca Blanco;		2
+2;	Tea;				3
+5;	Chocolate;			1
+2;	Rockpool;			2
+5;	Oyster;				3
+3;	Tempranillo;		3
