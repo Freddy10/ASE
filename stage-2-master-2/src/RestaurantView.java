@@ -35,7 +35,7 @@ public class RestaurantView extends JFrame implements Observer {
 
 		setTitle("Restaurant Ordering system");
 
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		this.model = model;
 		model.addObserver(this);
