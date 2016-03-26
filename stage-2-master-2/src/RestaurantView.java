@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.MenuBar;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,7 +25,7 @@ public class RestaurantView extends JFrame implements Observer {
 	private JTextArea[] tableRow;
 	protected JTextField discountField;
 	private JScrollPane scrollBar;
-	private JButton getReceipt, startProgram, closeProgram;
+	private JButton getReport, getReceipt, startProgram, closeProgram;
 	private JComboBox<String> dishes;
 	private JComboBox<String> kitchOpen;
 	protected JComboBox<String> tables;
@@ -93,10 +95,12 @@ public class RestaurantView extends JFrame implements Observer {
 
 		northPanel.add(tables, BorderLayout.BEFORE_FIRST_LINE);		
 		discountField = new JTextField(3);
-
 		getReceipt = new JButton("Bill");
 		getReceipt.setEnabled(false);
 		northPanel.add(getReceipt);
+		getReport = new JButton("Print Report");
+		getReport.setEnabled(false); 
+		northPanel.add(getReport);
 		closeProgram = new JButton("Close");
 		northPanel.add(closeProgram);
 		
@@ -122,6 +126,10 @@ public class RestaurantView extends JFrame implements Observer {
 	public void kitchenOrderListener(ActionListener a) {
 		startProgram.addActionListener(a);
 	}
+	
+	public void reportListener(ActionListener a){
+		getReport.addActionListener(a);
+	}
 
 	public void orderBillListener(ActionListener a) {
 		getReceipt.addActionListener(a);
@@ -141,8 +149,9 @@ public class RestaurantView extends JFrame implements Observer {
 		return value;
 	}
 
-	public void enableGetBillButton() {
+	public void enableGetButton() {
 		getReceipt.setEnabled(true);
+		getReport.setEnabled(true);
 	}
 
 	public void disableStartButton() {
@@ -160,6 +169,7 @@ public class RestaurantView extends JFrame implements Observer {
 
 		if (model.getThreadFinished()) {
 			getReceipt.setEnabled(true);
+			getReport.setEnabled(true);
 		}
 	}
 }
