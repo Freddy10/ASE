@@ -43,15 +43,26 @@ public class RestaurantView extends JFrame implements Observer {
 
 		setSize(100, 500);
 		setLocation(10, 20);
-
+		
+		//Panels 
 		JPanel centrePanel = new JPanel();
-
+		JPanel tablePanel = new JPanel();
+		JPanel northPanel = new JPanel();
+		JPanel southPanel = new JPanel();
+		
+		//view content pane
+		Container contentPane = getContentPane();
+		contentPane.add(centrePanel, BorderLayout.CENTER);
+		contentPane.add(northPanel, BorderLayout.NORTH);
+		contentPane.add(tablePanel, BorderLayout.SOUTH);
+		//contentPane.add(southPanel, BorderLayout.SOUTH);
+		tablePanel.add(customTabDisplay(), BorderLayout.EAST);
+		
+		//start bit
 		kitchen = new JTextArea(10, 30);
-
 		kitchen.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
 
 		hatch = new JTextArea(10, 30);
-
 		hatch.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
 
 		kitchen.setEditable(false);
@@ -62,56 +73,44 @@ public class RestaurantView extends JFrame implements Observer {
 		centrePanel.add(kitchen);
 		centrePanel.add(hatch);
 
-		Container contentPane = getContentPane();
-		contentPane.add(centrePanel, BorderLayout.WEST);
-
+		
 		scrollBar = new JScrollPane();
 		centrePanel.add(scrollBar, BorderLayout.CENTER);
-
-		JPanel southPanel = new JPanel();
-
-		startProgram = new JButton("Get Orders");
-		southPanel.add(startProgram);
+		startProgram = new JButton("Start Simulation");
+		northPanel.add(startProgram);
 
 		kitchOpen = new JComboBox<String>();
-
 		dishes = new JComboBox<String>();
-
 		dishes.addItem("from a textfile");
 		dishes.addItem("at random");
-
-		southPanel.add(new JLabel("Table:"));
-
+		
+		northPanel.add(new JLabel("Table:"));
+		
 		tables = new JComboBox<String>();
-
 		for (int i = 1; i < (numOfTables + 1); i++) {
 			tables.addItem("#" + i);
 		}
 
-		southPanel.add(tables, BorderLayout.BEFORE_FIRST_LINE);
-		centrePanel.add(customTabDisplay(), BorderLayout.EAST);
+		northPanel.add(tables, BorderLayout.BEFORE_FIRST_LINE);		
 		discountField = new JTextField(3);
 
 		getReceipt = new JButton("Bill");
 		getReceipt.setEnabled(false);
-		southPanel.add(getReceipt);
+		northPanel.add(getReceipt);
 		closeProgram = new JButton("Close");
-		southPanel.add(closeProgram);
-
-		contentPane.add(southPanel, BorderLayout.NORTH);
-
+		northPanel.add(closeProgram);
+		
 		pack();
 		setVisible(true);
 	}
 
 	private JPanel customTabDisplay() {
 
-		JPanel customTablePanel = new JPanel(new GridLayout(3, 2));
+		JPanel customTablePanel = new JPanel(new GridLayout(1, 6));
 		tableRow = new JTextArea[6];
 
 		for (int i = 0; i < 6; i++) {
-			tableRow[i] = new JTextArea(10, 30);
-
+			tableRow[i] = new JTextArea(10, 15);
 			tableRow[i].setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.LIGHT_GRAY));
 			tableRow[i].setLineWrap(true);
 			customTablePanel.add(tableRow[i]);

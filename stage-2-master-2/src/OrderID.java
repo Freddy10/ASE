@@ -9,7 +9,7 @@ public class OrderID {
 	private String lastID;
 
 	private OrderID(){
-		lastID = "O0";
+		lastID = "00";
 	}
 
 	public static synchronized OrderID getInstance(){
@@ -20,7 +20,7 @@ public class OrderID {
 	}
 
 	public synchronized String getNext(){
-		NumberFormat myFormat = new DecimalFormat("00000000");
+		NumberFormat myFormat = new DecimalFormat("00");
 		int i = Integer.parseInt(lastID.substring(1)) + 1;
 		lastID = "O" + myFormat.format(i);
 		return lastID;
