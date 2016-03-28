@@ -1,0 +1,49 @@
+LOG UPDATE
+ListOfOrders O01 ('Scallop', x2, table 1) has been sent to the kitchen.
+ListOfOrders O01 ('Scallop', x2, table 1) has been sent to the hatch.
+ListOfOrders O02 ('Oyster', x1, table 2) has been sent to the kitchen.
+ListOfOrders O02 ('Oyster', x1, table 2) has been sent to the hatch.
+ListOfOrders O01 ('Scallop', x2, table 1) has been sent to the table.
+ListOfOrders O03 ('Rockpool', x2, table 1) has been sent to the kitchen.
+ListOfOrders O02 ('Oyster', x1, table 2) has been sent to the table.
+ListOfOrders O03 ('Rockpool', x2, table 1) has been sent to the hatch.
+ListOfOrders O04 ('Monkfish', x3, table 1) has been sent to the kitchen.
+ListOfOrders O03 ('Rockpool', x2, table 1) has been sent to the table.
+ListOfOrders O05 ('Game Terrine', x1, table 1) has been sent to the kitchen.
+ListOfOrders O04 ('Monkfish', x3, table 1) has been sent to the hatch.
+ListOfOrders O04 ('Monkfish', x3, table 1) has been sent to the table.
+ListOfOrders O06 ('Cheese', x3, table 4) has been sent to the kitchen.
+ListOfOrders O05 ('Game Terrine', x1, table 1) has been sent to the hatch.
+ListOfOrders O05 ('Game Terrine', x1, table 1) has been sent to the table.
+ListOfOrders O06 ('Cheese', x3, table 4) has been sent to the hatch.
+ListOfOrders O07 ('Pistachio', x4, table 4) has been sent to the kitchen.
+ListOfOrders O07 ('Pistachio', x4, table 4) has been sent to the hatch.
+ListOfOrders O06 ('Cheese', x3, table 4) has been sent to the table.
+ListOfOrders O08 ('Lamb', x2, table 1) has been sent to the kitchen.
+ListOfOrders O07 ('Pistachio', x4, table 4) has been sent to the table.
+ListOfOrders O09 ('Monkfish', x1, table 3) has been sent to the kitchen.
+ListOfOrders O08 ('Lamb', x2, table 1) has been sent to the hatch.
+ListOfOrders O08 ('Lamb', x2, table 1) has been sent to the table.
+ListOfOrders O10 ('Pumpkin', x2, table 2) has been sent to the kitchen.
+ListOfOrders O09 ('Monkfish', x1, table 3) has been sent to the hatch.
+ListOfOrders O10 ('Pumpkin', x2, table 2) has been sent to the hatch.
+ListOfOrders O09 ('Monkfish', x1, table 3) has been sent to the table.
+ListOfOrders O11 ('Pumpkin', x2, table 3) has been sent to the kitchen.
+ListOfOrders O11 ('Pumpkin', x2, table 3) has been sent to the hatch.
+ListOfOrders O10 ('Pumpkin', x2, table 2) has been sent to the table.
+ListOfOrders O12 ('Caramel and Apple', x2, table 4) has been sent to the kitchen.
+ListOfOrders O12 ('Caramel and Apple', x2, table 4) has been sent to the hatch.
+ListOfOrders O11 ('Pumpkin', x2, table 3) has been sent to the table.
+ListOfOrders O13 ('Coffee', x3, table 6) has been sent to the kitchen.
+ListOfOrders O13 ('Coffee', x3, table 6) has been sent to the hatch.
+ListOfOrders O14 ('Chocolate & Orange', x1, table 3) has been sent to the kitchen.
+ListOfOrders O12 ('Caramel and Apple', x2, table 4) has been sent to the table.
+ListOfOrders O14 ('Chocolate & Orange', x1, table 3) has been sent to the hatch.
+ListOfOrders O15 ('Water', x5, table 5) has been sent to the kitchen.
+ListOfOrders O15 ('Water', x5, table 5) has been sent to the hatch.
+ListOfOrders O13 ('Coffee', x3, table 6) has been sent to the table.
+ListOfOrders O16 ('Juice', x4, table 3) has been sent to the kitchen.
+ListOfOrders O16 ('Juice', x4, table 3) has been sent to the hatch.
+ListOfOrders O14 ('Chocolate & Orange', x1, table 3) has been sent to the table.
+ListOfOrders O15 ('Water', x5, table 5) has been sent to the table.
+ListOfOrders O16 ('Juice', x4, table 3) has been sent to the table.

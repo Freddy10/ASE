@@ -39,7 +39,7 @@ public class RestaurantController{
 	    	javax.swing.UIManager.put("OptionPane.messageFont", new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	    	try{
 				String numberText = view.tables.getSelectedItem().toString().substring(1);
-				String discountText = "10";
+				String discountText = "5";
 				if(!discountText.equals("")){
 					if(Integer.parseInt(discountText) < 0 || Integer.parseInt(discountText) > 100){
 						String error = "discount  not  correct";
