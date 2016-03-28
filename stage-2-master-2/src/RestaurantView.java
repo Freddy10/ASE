@@ -25,7 +25,7 @@ public class RestaurantView extends JFrame implements Observer {
 	private JTextArea[] tableRow;
 	protected JTextField discountField;
 	private JScrollPane scrollBar;
-	private JButton getReport, getReceipt, startProgram, closeProgram;
+	private JButton getReceipt, startProgram, closeProgram;
 	private JComboBox<String> dishes;
 	private JComboBox<String> kitchOpen;
 	protected JComboBox<String> tables;
@@ -98,9 +98,9 @@ public class RestaurantView extends JFrame implements Observer {
 		getReceipt = new JButton("Bill");
 		getReceipt.setEnabled(false);
 		northPanel.add(getReceipt);
-		getReport = new JButton("Print Report");
-		getReport.setEnabled(false); 
-		northPanel.add(getReport);
+		//getReport = new JButton("Print Report");
+		//getReport.setEnabled(false); 
+		//northPanel.add(getReport);
 		closeProgram = new JButton("Close");
 		northPanel.add(closeProgram);
 		
@@ -127,9 +127,7 @@ public class RestaurantView extends JFrame implements Observer {
 		startProgram.addActionListener(a);
 	}
 	
-	public void reportListener(ActionListener a){
-		getReport.addActionListener(a);
-	}
+
 
 	public void orderBillListener(ActionListener a) {
 		getReceipt.addActionListener(a);
@@ -151,7 +149,6 @@ public class RestaurantView extends JFrame implements Observer {
 
 	public void enableGetButton() {
 		getReceipt.setEnabled(true);
-		getReport.setEnabled(true);
 	}
 
 	public void disableStartButton() {
@@ -169,7 +166,6 @@ public class RestaurantView extends JFrame implements Observer {
 
 		if (model.getThreadFinished()) {
 			getReceipt.setEnabled(true);
-			getReport.setEnabled(true);
 		}
 	}
 }

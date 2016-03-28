@@ -39,31 +39,36 @@ TABLE SUMMARY
 ==============
 TABLE 1
 MONKFISH            3  , 15.00 =  45.00
+WAHACA BLANCO       2  ,  2.50 =   5.00
 LAMB                2  , 14.50 =  29.00
 SCALLOP             2  ,  3.00 =   6.00
 GAME TERRINE        1  ,  3.50 =   3.50
 ROCKPOOL            2  ,  4.00 =   8.00
                                  
-Total bill  :                     91.50
+Total bill  :                     96.50
 Reduction :                       18.00
-Total reduction :                 73.50
+Total reduction :                 78.50
 
 TABLE 2
+TEA                 3  ,  1.50 =   4.50
 PUMPKIN             2  ,  1.50 =   3.00
+ROCKPOOL            2  ,  4.00 =   8.00
 OYSTER              1  ,  2.50 =   2.50
                                  
-Total bill  :                      5.50
-Reduction :                        0.00
-Total reduction :                  5.50
+Total bill  :                     18.00
+Reduction :                        2.00
+Total reduction :                 16.00
 
 TABLE 3
 CHOCOLATE & ORANGE  1  ,  3.50 =   3.50
 MONKFISH            1  , 15.00 =  15.00
+JUICE               4  ,  2.50 =  10.00
 PUMPKIN             2  ,  1.50 =   3.00
+TEMPRANILLO         3  ,  2.50 =   7.50
                                  
-Total bill  :                     21.50
-Reduction :                        4.00
-Total reduction :                 17.50
+Total bill  :                     39.00
+Reduction :                        6.00
+Total reduction :                 33.00
 
 TABLE 4
 CARAMEL AND APPLE   2  ,  3.50 =   7.00
@@ -75,11 +80,13 @@ Reduction :                        6.00
 Total reduction :                 27.50
 
 TABLE 5
+CHOCOLATE           1  ,  2.50 =   2.50
 WATER               5  ,  2.50 =  12.50
+OYSTER              3  ,  2.50 =   7.50
                                  
-Total bill  :                     12.50
-Reduction :                        2.00
-Total reduction :                 10.50
+Total bill  :                     22.50
+Reduction :                        4.00
+Total reduction :                 18.50
 
 TABLE 6
 COFFEE              3  ,  2.00 =   6.00
@@ -92,42 +99,42 @@ FREQUENCY REPORT
 ================
 Monkfish              4
 Water                 5
+Wahaca Blanco         2
 Pumpkin               4
 Chocolate & Orange    1
+Tempranillo           3
+Juice                 4
+Chocolate             1
 Cheese                3
 Scallop               2
 Coffee                3
 Lamb                  2
 Pistachio             4
-Oyster                1
+Tea                   3
+Oyster                4
 Game Terrine          1
 Caramel and Apple     2
-Rockpool              2
+Rockpool              4
 
 DISHES NOT ORDERED
 ==================
-Chocolate
 Coleslaw
 Curly Fries
 Halibut
-Juice
 Mushroom risotto
 Pinot Grigio
 Potato Wedges
 Sauvignon Blanc
 Sea Buckthorn
 Sea bass
-Tea
-Tempranillo
-Wahaca Blanco
 
 BILLS PRICE STATISTICS (without discounts)
 ==========================================
-Most expensive table: Table 1, whose bill is £91.50
-Cheapest table: Table 2, whose bill is £5.50
-The average bill paid is: £28.42
+Most expensive table: Table 1, whose bill is £96.50
+Cheapest table: Table 6, whose bill is £6.00
+The average bill paid is: £35.92
 
 VEGETARIAN DISHES STATISTICS
 ============================
 Menu contains 19 veggie dishes out of 27
-61.0% of orders are vegetarian dishes
+65.0% of orders are vegetarian dishes
