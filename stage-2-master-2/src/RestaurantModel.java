@@ -244,7 +244,7 @@ public class RestaurantModel extends Observable {
 
 		try {
 
-			Thread.sleep(400);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

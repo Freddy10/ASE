@@ -25,7 +25,7 @@ public class RestaurantController{
 	    	String popValue = view.getPopulateMethod();
 	    	model.setPopulateMethod(popValue);
 	    	//Gets the length of time the kitchen will be open from the GUI.
-	    	String openTime = "20";
+	    	String openTime = "15";
 	    	model.setKitchOpenTime(openTime);
 			model.start();
 			view.disableStartButton();
@@ -39,7 +39,7 @@ public class RestaurantController{
 	    	javax.swing.UIManager.put("OptionPane.messageFont", new Font(Font.MONOSPACED, Font.PLAIN, 12));
 	    	try{
 				String numberText = view.tables.getSelectedItem().toString().substring(1);
-				String discountText = "5";
+				String discountText = "12";
 				if(!discountText.equals("")){
 					if(Integer.parseInt(discountText) < 0 || Integer.parseInt(discountText) > 100){
 						String error = "discount  not  correct";

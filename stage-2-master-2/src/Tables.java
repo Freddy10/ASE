@@ -14,7 +14,7 @@ public class Tables implements Runnable {
 		while (!kitchen.hatchIsFinished() || !kitchen.isFinishedRun()) {
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(900);
 			} catch (InterruptedException e) {
 			}
 			kitchen.orderToTable();

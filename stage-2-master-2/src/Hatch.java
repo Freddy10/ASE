@@ -16,7 +16,7 @@ public class Hatch implements Runnable {
 			if (kitchen.isThreadActive() && (!kitchen.noOrdersInKitchen())) {
 
 				delayTime = kitchen.getMenuItemMap().findByName(kitchen.getFirstOrder().getItemName())
-						.getPreparationTime() * 70;
+						.getPreparationTime() * 50;
 				if (!orderReady)
 					orderReady = true;
 			} else if ((!kitchen.isFinishedRun()) && (kitchen.noOrdersInKitchen()))
